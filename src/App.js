@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import AddTask from "./components/AddTask"
 
-const Task = () => {
-
+const App = () => {
     return (
-        <div>
-        </div>
+        <AddTask />
     )
-
 }
+
+export default App
 
