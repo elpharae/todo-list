@@ -1,30 +1,16 @@
-import { useState, useEffect } from 'react';
+import '../style/inputfield.css'
 
+const InputField = ({ type, placeholder, getInputState, required }) => {
 
-const InputField = ({ type, placeholder, getValue, isValid, validator }) => {
-
-    const [inputState, setInputState] = useState({
-        value: "",
-        valid: false
-    })
-    const {value, valid} = inputState
-
-    const setState = (e) => {
-        setInputState(() => ({
+    const inputChange = (e) => {
+        const newInput = {
             value: e.target.value,
-            valid: validator(e.target.value)
-        })) 
+            valid: e.target.validity.valid
+        }
+        getInputState(newInput)
     }
 
-    useEffect(() => {
-        getValue(value)
-        isValid(valid)
-    }, [value, valid, getValue, isValid])
-
-    return (
-        <input type={type} placeholder={placeholder} onChange={setState}/>
-    )
-
+    return <input className="task-form-input" type={type} placeholder={placeholder} onChange={inputChange} required={required}/>
 }
 
 export default InputField
