@@ -1,6 +1,6 @@
 import '../style/inputfield.css'
 
-const InputField = ({ type, placeholder, getInputState, required }) => {
+const InputField = ({ type, placeholder, getInputState, required, min }) => {
 
     const inputChange = (e) => {
         const newInput = {
@@ -10,7 +10,7 @@ const InputField = ({ type, placeholder, getInputState, required }) => {
         getInputState(newInput)
     }
 
-    return <input className="task-form-input" type={type} placeholder={placeholder} onChange={inputChange} required={required}/>
+    return <input className="task-form-input" min={min} type={type} placeholder={placeholder} onChange={inputChange} required={required}/>
 }
 
 export default InputField

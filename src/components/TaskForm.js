@@ -25,7 +25,12 @@ const TaskForm = ({ getTask }) => {
     }
 
     useEffect(() => {
-        setValidInput(formState.title.length === 0 || formState.dueDate.length === 0)
+        const inputDate = new Date(formState.dueDate)
+
+        setValidInput(formState.title.length !== 0 
+            && formState.dueDate.length !== 0 
+            && inputDate.getTime() > new Date().getTime()
+        )
     }, [setValidInput, formState])
 
     const getTitle = (input) => setFormState((prevState) => ({ ...prevState, title: input.value }))
@@ -37,7 +42,7 @@ const TaskForm = ({ getTask }) => {
             <InputField type="text" placeholder="Task title" getInputState={getTitle} required={true}/><br/>
             <InputField type="datetime-local" placeholder="" getInputState={getDueDate} required={true}/><br/>
             <InputField type="text" placeholder="Task description" getInputState={getDesc} required={false}/><br/>
-            <button type="submit" disabled={validInput}>Add task</button>
+            <button type="submit" disabled={!validInput}>Add task</button>
         </form>
     )
 

@@ -1,53 +1,49 @@
 import { useState, useEffect } from 'react';
 import '../style/task.css'
 
-const formatDate = (date) => {
+export const formatDate = (date) => {
     const options = {
-        weekday: "long",
         day: "numeric",
-        month: "long",
+        month: "numeric",
         year: "numeric",
         hour: "numeric",
         minute: "numeric",
     }
     const dateStr = date.toLocaleString("default", options)
 
-    return `${dateStr}`
+    return `Due on ${dateStr}`
 }
 
-const formatRemainingTime = (date) => {
-
-    const days = Math.floor(date / (1000 * 60 * 60 * 24))
-    const hours = Math.floor((date % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
-    const minutes = Math.floor((date % (1000 * 60 * 60)) / (1000 * 60))
-    const seconds = Math.floor((date % (1000 * 60)) / 1000)
-
-    return `${days} d ${hours} hr ${minutes} min ${seconds} sec` 
-}
-
-const Task = ( { title, dueDate, desc } ) => {
+const Task = ( { taskId, title, dueDate, desc, deleteTask } ) => {
 
     const [taskInfo, setTaskInfo] = useState({
-        remainingTime: dueDate.getTime() - new Date().getTime(),
         pastDue: dueDate.getTime() - new Date().getTime() <= 0,
     })
 
+    // TODO - do this for all tasks at once in TaskList
     useEffect(() => {
         const interval = setInterval(() => {
             setTaskInfo(() => ({
-                remainingTime: dueDate.getTime() - new Date().getTime(),
                 pastDue: dueDate.getTime() - new Date().getTime() <= 0
             }))
         }, 1000)
 
         return () => clearInterval(interval)
-    }, [dueDate])
+    }, [])
+
+    const deleteSelf = () => {
+        deleteTask(taskId)
+    }
 
     return (
         <div className={taskInfo.pastDue ? "task-list-item past-due" : "task-list-item"}>
+            <div className="task-panel">
+                {!taskInfo.pastDue && <button className="task-item-finished" />}
+                {!taskInfo.pastDue && <button className="task-item-edit" />}
+                <button className="task-item-delete" onClick={deleteSelf}/>
+            </div>
             <div className="task-time">
                 <div>{formatDate(dueDate)}</div>
-                <div>{taskInfo.pastDue ? "Past due!" : formatRemainingTime(taskInfo.remainingTime)}</div>
             </div>
             <div className="task-title">{title}</div>
             <div className="task-desc">{desc.length === 0 ? "No description" : desc}</div>

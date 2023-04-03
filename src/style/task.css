@@ -11,15 +11,67 @@
     margin: 5px;
 }
 
-.task-list-item > .task-time {
-    background-color: rgb(35, 138, 206);
-    padding: 10px;
+.task-list-item > .task-panel {
+    padding: 5px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    background-color: rgb(184, 184, 184);
+    display: flex;
+    justify-content: space-around;
+}
+
+.task-panel > button {
+    width: 1rem;
+    height: 1rem;
+    border: 1px solid rgb(156, 156, 156);
+    border-radius: 0.5rem;
+}
+
+.task-item-finished {
+    background-color: rgb(91, 224, 91);
+}
+
+.task-item-finished:hover {
+    box-shadow: 0 0 15px rgb(16, 158, 16);
+    border-color: rgb(91, 224, 91);
+}
+
+.task-item-finished:active {
+    background-color: rgb(16, 158, 16);
+}
+
+.task-item-edit {
+    background-color: rgb(110, 110, 238);
+}
+
+.task-item-edit:hover {
+    box-shadow: 0 0 15px rgb(56, 56, 179);
+    border-color: rgb(110, 110, 238);
+}
+
+.task-item-edit:active {
+    background-color: rgb(56, 56, 179);
+}
+
+.task-item-delete {
+    background-color: rgb(239, 80, 80);
+}
+
+.task-item-delete:hover {
+    box-shadow: 0 0 15px rgb(197, 40, 40);
+    border-color: rgb(239, 80, 80);
+}
+
+.task-item-delete:active {
+    background-color: rgb(197, 40, 40);
+}
+
+.task-list-item > .task-time {
+    background-color: rgb(35, 138, 206);
+    padding: 5px;
     color: white;
     font-weight: bold;
 }
-
 
 .past-due > .task-time {
     background-color: rgb(203, 11, 11);
@@ -49,4 +101,3 @@
 .past-due > .task-desc {
     background-color: rgb(254, 209, 209);
 }
-
