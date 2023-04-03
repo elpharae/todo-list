@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import TaskForm from "./TaskForm"
 import Task from "./Task"
 
@@ -7,9 +7,10 @@ const TaskList = () => {
     const [tasks, setTasks] = useState([])
 
     const getTask = (task) => {
+
         setTasks((prevState) => [
-            ...prevState,
-            task
+            task,
+            ...prevState
         ])
     }
 
