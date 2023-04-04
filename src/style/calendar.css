@@ -1,0 +1,13 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.calendar-days {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.calendar-days > button {
+    flex-basis: calc(100% / 7)
+}

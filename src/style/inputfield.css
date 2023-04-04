@@ -1,6 +1,0 @@
-.task-form-input:required:valid {
-    border: 1px solid green;
-}
-.task-form-input:required:invalid {
-    border: 1px solid red;
-}

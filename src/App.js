@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import TaskList from "./components/TaskList"
+import Calendar from "./components/Calendar"
 
 const App = () => {
     return (
-        <TaskList />
+        <div className="content">
+            <Calendar />
+            <TaskList />
+        </div>
     )
 }
 
