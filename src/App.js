@@ -49,7 +49,7 @@ const App = () => {
 
         const newState = {
             ...appState,
-            tasks: [ task, ...appState.tasks ],
+            tasks: [ ...appState.tasks, task ],
             taskNum: appState.taskNum + 1
         }
 

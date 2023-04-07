@@ -15,6 +15,7 @@ const AddTask = ({ show, addCallback, showCallback }) => {
     }, [showCallback])
 
     const handleSubmit = (e) => {
+        e.preventDefault()
         handleAdd(formState)
         handleHide()
     }
