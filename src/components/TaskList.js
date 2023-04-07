@@ -1,17 +1,31 @@
-import { useState, useEffect } from 'react';
+import { useCallback, useMemo } from 'react';
 import Task from "./Task"
-import AddTask from "./AddTask"
-import "../style/tasklist.css"
 
-const TaskList = () => {
+const TaskList = ( { appState, addCallback, removeCallback, clearCallback } ) => {
+
+    const tasks = useMemo(() => appState.tasks, [appState])
+    const date = useMemo(() => appState.date, [appState])
+
+    const handleAdd = useCallback(() => addCallback(), [addCallback])
+    const handleRemove = useCallback((taskId) => removeCallback(taskId), [removeCallback])
+    const handleClear = useCallback(() => clearCallback(), [clearCallback])
 
     return (
         <div className="tasks">
-            <Task taskId={1} time={"10:00"}title="Task title" category="Work"/>
-            <Task taskId={1} time={"10:00"}title="Task title" category="Other"/>
-            <Task taskId={1} time={"10:00"}title="Task title" category="Free time"/>
-            <Task taskId={1} time={"10:00"}title="Task title" category="Exercise"/>
-            <Task taskId={1} time={"10:00"}title="Task title" category="Work"/>
+            <div className="tasks-title">
+                {date.toLocaleString("default", {year: "numeric", month: "long", day: "numeric"})}
+            </div>
+            <div className="tasks-items">
+                <div className="tasks-buttons">
+                    <button onClick={handleAdd}>+ New Task</button>
+                    <button onClick={handleClear}>Clear Tasks</button>
+                </div>
+                {
+                    tasks.map((v, i) => {
+                        return <Task key={i} task={v} removeCallback={handleRemove} />
+                    })
+                }        
+            </div>
         </div>
     )
 }

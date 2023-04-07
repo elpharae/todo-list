@@ -1,0 +1,319 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+:root {
+    --main: #e6e6e6;
+    --main-dim: #cacaca;
+    --main-dark: #9e9e9e;
+    --special: #efac1c;
+    --special-dim: #b27f12;
+    --special-dark: #846420;
+}
+
+.page > h1 {
+    padding: 20px;
+    width: 100%;
+    text-align: center;
+
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-size: 2rem;
+    border-bottom: 5px solid var(--special-dark);
+    background-color: var(--special)
+}
+
+.task-form {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: fixed;
+    z-index: 1;
+
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    
+    background-color: var(--special);
+    border: 5px solid var(--special-dim);
+    border-radius: 20px;
+        
+    opacity: 0%;
+    transition: opacity 240ms ease-in-out;
+}
+
+
+.task-form > label {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2.5px 0;
+}
+
+.task-form > label > div {
+    padding: 0 10px;
+    margin: auto;
+}
+
+.task-form > label > input {
+    width: 150px;
+    text-align: center;
+    height: 30px;
+
+    border: none;
+    background-color: var(--special-dim);
+    color: white;
+    border-radius: 10px;
+}
+
+.task-form-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+}
+
+.task-form-buttons {
+    padding: 10px;
+}
+
+.task-form-buttons > button {
+    width: 80px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+
+    border: none;
+    background-color: var(--main);
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.task-form-buttons > button:hover {
+    background-color: var(--main-dim);
+    transition: background-color 120ms ease-in-out;
+}
+
+
+.task-form-buttons > button:active {
+    background-color: var(--main-dark);
+    color: white;
+    transition: background-color 120ms ease-in-out, color 120ms ease-in-out;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    z-index: 2;
+
+    transition: filter 240ms ease-in-out;
+}
+
+.calendar {
+    display: flex;
+    flex-flow: column nowrap;
+    padding: 10px;
+    max-width: 425px;
+}
+
+.calendar-panel {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+.calendar-panel > input {
+    width: 80px;
+    text-align: center;
+    border: none;
+}
+
+.calendar-panel > .calendar-input-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calendar-panel > * {
+    padding: 0 10px;
+    margin: 0 5px;
+    height: 35px;
+
+    background-color: var(--main);
+    border-radius: 10px;
+}
+
+.calendar-days {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+.calendar-days > * {
+    flex-basis: calc(90% / 7);
+    height: 30px;
+    margin: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: none;
+    border-radius: 10px;
+    background-color: var(--main);
+}
+
+.calendar-days > div {
+    font-weight: bold;
+}
+
+.calendar-days > *:nth-child(7n), .calendar-days > *:nth-child(7n - 1) {
+    background-color: var(--special);
+}
+
+.calendar-days > button:hover {
+    background-color: var(--main-dim);
+
+    transition: background-color 120ms ease-in-out;
+}
+
+.calendar-days > button:nth-child(7n):hover, .calendar-days > button:nth-child(7n - 1):hover {
+    background-color: var(--special-dim);
+    
+    transition: background-color 120ms ease-in-out;
+}
+
+.calendar-days > button:disabled,
+.calendar-days > button:active {
+    background-color: var(--main-dark);
+    color: white;
+ 
+    transition: background-color 120ms ease-out, color 120ms ease-out;
+}
+
+.calendar-days > button:nth-child(7n):disabled, .calendar-days > button:nth-child(7n):active, 
+.calendar-days > button:nth-child(7n - 1):disabled, .calendar-days > button:nth-child(7n - 1):active {
+    background-color: var(--special-dark);
+    color: white;
+
+    transition: background-color 120ms ease-out, color 120ms ease-out;
+}
+
+.calendar-buttons {
+    padding: 10px 0;
+}
+
+.tasks {
+    width: 100%;
+    padding: 0 10px;
+}
+
+.tasks-title {
+    text-align: center;
+    padding: 10px 0;
+
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.tasks-items {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
+.tasks-buttons, .calendar-buttons, .task-form-buttons {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.tasks-buttons > button, .calendar-buttons > button {
+    width: 150px;
+    padding: 10px 15px;
+
+    border: none;
+    background-color: var(--special);
+    font-weight: bold;
+    font-size: 1rem;
+    border-radius: 10px;
+}
+
+.tasks-buttons > button:hover, .calendar-buttons > button:hover {
+    background-color: var(--special-dim);
+    transition-duration: 120ms;
+}
+
+.tasks-buttons > button:active, .calendar-buttons > button:active {
+    background-color: var(--special-dark);
+    color: white;
+    transition-duration: 120ms;
+}
+
+.task {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin: 5px 0;
+
+    background-color: var(--main);
+    border-radius: 10px;
+}
+
+.task > * {
+    width: calc(100% / 4);
+    text-align: center;
+}
+
+.task-button {
+    width: 30px;
+    height: 30px;
+    
+    border-radius: 15px;
+    border: none;
+    background-color: var(--special);
+}
+
+.task-button:hover {
+    border: 5px solid var(--special-dim);
+    box-shadow: 0 0 10px var(--special-dark);
+    transition-duration: 120ms;
+}
+
+.task-button:active {
+    background-color: var(--special-dark);
+}
+
+@media (min-width: 768px) {
+    .container {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+}
+
+@media (min-width: 1024px) {
+    .container {
+        width: 80%;
+        margin: auto;
+    }
+}
+
+

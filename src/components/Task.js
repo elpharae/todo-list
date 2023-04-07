@@ -1,19 +1,15 @@
-import '../style/task.css'
+import { useCallback } from "react"
 
-const Task = ( { taskId, title, time, category, deleteTask } ) => {
+const Task = ( { task, removeCallback } ) => {
 
-    const deleteSelf = () => {
-        deleteTask(taskId)
-    }
-
+    const handleRemove = useCallback(() => removeCallback(task.taskId), [removeCallback, task.taskId])
+    
     return (
-        <div className="task-item">
-            <div className="task-button">
-                <button className="task-remove" onClick={deleteSelf}/>  
-            </div>
-            <div className="task-title">{title}</div>
-            <div className="task-time">{time}</div>
-            <div className="task-category">{category}</div>
+        <div className="task">
+            <button className="task-button" onClick={handleRemove}/>  
+            <div className="task-title">{task.title}</div>
+            <div className="task-time">{task.time}</div>
+            <div className="task-category">{task.category}</div>
         </div>
     )
 }

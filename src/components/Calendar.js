@@ -1,55 +1,57 @@
-import React, { useState, useEffect } from 'react';
-import "../style/calendar.css"
+import React, { useState, useMemo, useCallback } from 'react'
 
 const currentDate = new Date()
 
-const Calendar = () => {
-    
-    const [date, setDate] = useState(currentDate)
+const Calendar = ( { changeCallback, exportCallback, eraseCallback } ) => {
+
     const [input, setInput] = useState({
         month: currentDate.getMonth(),
         year: currentDate.getFullYear(),
-        numberOfDays: new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate(),
-        startingDay: new Date(currentDate.year, currentDate.month, 1).getDay() - 1
     })
 
-    useEffect(() => {
-        setDate(new Date(input.year, input.month, -input.startingDay))
+    const date = useMemo(() => {
+        return new Date(input.year, input.month, 1)
     }, [input])
 
-    useEffect(() => {
-        setInput((prevState) => ({
-            ...prevState,
-            numberOfDays: new Date(input.year, input.month + 1, 0).getDate(),
-            startingDay: new Date(input.year, input.month, 1).getDay() - 1
-        }))
-    }, [input.month, input.year])
-
-    const handleDayButton = (e) => {
-        const date = new Date(e.target.attributes.date.value)
-        console.log(date.toLocaleString("default", {year: "numeric", month: "long", day: "numeric"}))
-    }
+    const handleChange = useCallback((date) => changeCallback(date), [changeCallback])
+    const handleExport = useCallback(() => exportCallback(), [exportCallback])
+    const handleErase = useCallback(() => eraseCallback(), [eraseCallback])
+    const handleClick = (e) => handleChange(new Date(e.target.value))
 
     return (
         <div className="calendar">
             <div className="calendar-panel">
+                <div className="calendar-input-label">Month</div>
                 <input type="number" placeholder="Month" defaultValue={input.month + 1} min={1} max={12} onChange={(e) => setInput((prevInput) => ({ ...prevInput, month: e.target.value - 1 }))}/>
+                <div className="calendar-input-label">Year</div>
                 <input type="number" placeholder="Year" defaultValue={input.year} onChange={(e) => setInput((prevInput) => ({ ...prevInput, year: e.target.value }))}/>
             </div>
             <div className="calendar-days">
+                <div>Mon</div>
+                <div>Tue</div>
+                <div>Wed</div>
+                <div>Thu</div>
+                <div>Fri</div>
+                <div>Sat</div>
+                <div>Sun</div>
                 {
-                    Array.from({ length: input.numberOfDays + input.startingDay }, (_, i) => i + 1).map(
+                    Array.from({ length: 49 }, (_, i) => i - 14).map(
                         (value, index) => {
+                            let buttonDate = new Date(date.getFullYear(), date.getMonth(), 1)
+                            buttonDate.setDate(value + (7 - date.getDay()) + 2)
+
                             return (
-                                <button key={index} date={(new Date(date.getFullYear(), date.getMonth(), date.getDate() + value))} onClick={handleDayButton}>
-                                    {
-                                        new Date(date.getFullYear(), date.getMonth(), date.getDate() + value).toLocaleString("default", {month: "long", day: "numeric", weekday: "long"})
-                                    }
+                                <button disabled={buttonDate.getMonth() !== input.month} key={index} value={buttonDate} onClick={handleClick}>
+                                    {buttonDate.getDate()}
                                 </button>
                             )
                         }
                     )
-        }
+                }
+            </div>
+            <div className="calendar-buttons">
+                <button onClick={handleExport}>Export calendar</button>
+                <button onClick={handleErase}>Erase calendar</button>
             </div>
         </div>
     )
