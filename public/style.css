@@ -14,10 +14,6 @@
     --special-dark: #846420;
 }
 
-canvas {
-    background: linear-gradient(to bottom left, var(--main-dim), var(--special-dim));
-}
-
 body {
     overflow-y: scroll;
     overflow-x: hidden;
