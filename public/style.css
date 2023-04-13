@@ -12,6 +12,12 @@
     --special: #efac1c;
     --special-dim: #b27f12;
     --special-dark: #846420;
+    --status-success-bg: #71cb11;
+    --status-success-border: 5px solid #099007;
+    --status-failure-bg: #e32720;
+    --status-failure-border: 5px solid #c0120c;
+    --status-failure-border: 5px solid #c0120c;
+    --xd: 5px solid #c5ccf9;
 }
 
 body {
@@ -56,7 +62,7 @@ body {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 2.5px 0;
+    padding: 2px 0;
 }
 
 .task-form > label > div {
@@ -73,6 +79,38 @@ body {
     background-color: var(--special-dim);
     color: white;
     border-radius: 10px;
+}
+
+.categories {
+    display: flex;
+    flex-direction: column;    
+    align-self: center;
+    width: 150px;
+}
+.categories > label {
+    display: flex;
+    justify-content: space-between;
+    padding: 2px;
+}
+
+.categories > label > input[type="radio"] {
+    appearance: none;
+}
+
+.categories > label > input[type="radio"]::after {
+    content: "";
+    display: block;
+    width: 0.8rem;
+    height: 0.8rem;
+    border: 0.2rem solid var(--main-dim);
+    border-radius: 0.25rem;
+    background-color: var(--main);
+    transition: background-color 120ms ease-in-out, border 120ms ease-in-out;
+}
+
+.categories > label > input[type="radio"]:checked::after {
+    background-color: var(--special-dim);
+    border: 0.2rem solid var(--special-dark);
 }
 
 .task-form-title {
@@ -185,24 +223,21 @@ body {
     background-color: var(--special);
 }
 
-.calendar-days > button:hover {
-    background-color: var(--main-dim);
-
-    transition: background-color 120ms ease-in-out;
+.calendar-days > button {
+    transition: background-color 120ms ease-out, color 120ms ease-out;
 }
+
+.calendar-days > button:hover {
+    background-color: var(--main-dim);}
 
 .calendar-days > button:nth-child(7n):hover, .calendar-days > button:nth-child(7n - 1):hover {
     background-color: var(--special-dim);
-    
-    transition: background-color 120ms ease-in-out;
 }
 
 .calendar-days > button:disabled,
 .calendar-days > button:active {
     background-color: var(--main-dark);
     color: white;
- 
-    transition: background-color 120ms ease-out, color 120ms ease-out;
 }
 
 .calendar-days > button:nth-child(7n):disabled, .calendar-days > button:nth-child(7n):active, 
@@ -252,17 +287,23 @@ body {
     font-weight: bold;
     font-size: 1rem;
     border-radius: 10px;
+
+    transition: background-color 120ms ease-in-out, color 120ms ease-in-out;
 }
 
 .tasks-buttons > button:hover, .calendar-buttons > button:hover {
     background-color: var(--special-dim);
-    transition-duration: 120ms;
 }
 
 .tasks-buttons > button:active, .calendar-buttons > button:active {
     background-color: var(--special-dark);
     color: white;
-    transition-duration: 120ms;
+}
+
+.tasks-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .task {
@@ -274,7 +315,6 @@ body {
     padding: 10px;
     margin: 5px 0;
 
-    background-color: var(--main);
     border-radius: 10px;
 }
 
@@ -288,14 +328,15 @@ body {
     height: 30px;
     
     border-radius: 15px;
-    border: none;
+    border: 3px solid var(--main-dark);
     background-color: var(--special);
+
+    transition: border 120ms ease-in-out, box-shadow 120ms ease-in-out, background-color 120ms ease-in-out;
 }
 
 .task-button:hover {
     border: 5px solid var(--special-dim);
     box-shadow: 0 0 10px var(--special-dark);
-    transition-duration: 120ms;
 }
 
 .task-button:active {

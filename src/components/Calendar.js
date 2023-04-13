@@ -39,7 +39,6 @@ const Calendar = ( { changeCallback, exportCallback, eraseCallback } ) => {
                         (value, index) => {
                             let buttonDate = new Date(date.getFullYear(), date.getMonth(), 1)
                             buttonDate.setDate(value + (7 - date.getDay()) + 2)
-
                             return (
                                 <button disabled={buttonDate.getMonth() !== input.month} key={index} value={buttonDate} onClick={handleClick}>
                                     {buttonDate.getDate()}

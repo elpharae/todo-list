@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import TaskList from "./components/TaskList"
 import Calendar from "./components/Calendar"
 import AddTask from "./components/AddTask"
@@ -101,9 +101,9 @@ const App = () => {
 
     return (
         <div className="page">
-            <h1>Day2Day Planner</h1>
+            <h1>Your Calendar</h1>
             <AddTask show={showDialog} addCallback={handleAdd} showCallback={handleShowDialog}/>
-            <div style={{filter: showDialog ? "blur(10px)" : "none", pointerEvents: showDialog ? "none" : "auto"}}className="container">
+            <div style={{filter: showDialog ? "blur(10px)" : "none", pointerEvents: showDialog ? "none" : "auto"}} className="container">
                 <Calendar changeCallback={handleChange} exportCallback={handleExport} eraseCallback={handleErase}/>
                 <TaskList appState={appState} addCallback={handleShowDialog} removeCallback={handleRemove} clearCallback={handleClear}/>
             </div>

@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from 'react';
 import Task from "./Task"
 
-const TaskList = ( { appState, addCallback, removeCallback, clearCallback } ) => {
+const TaskList = ({ appState, addCallback, removeCallback, clearCallback }) => {
 
     const tasks = useMemo(() => appState.tasks, [appState])
     const date = useMemo(() => appState.date, [appState])
@@ -13,7 +13,7 @@ const TaskList = ( { appState, addCallback, removeCallback, clearCallback } ) =>
     return (
         <div className="tasks">
             <div className="tasks-title">
-                {date.toLocaleString("default", {year: "numeric", month: "long", day: "numeric"})}
+                {date.toLocaleString("default", {year: "numeric", month: "long", day: "numeric", weekday: "long"})}
             </div>
             <div className="tasks-items">
                 <div className="tasks-buttons">

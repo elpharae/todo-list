@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react'
 
-const defaultValues = {title: "", time: "", category: ""}
+const defaultValues = {title: "", time: "", category: "Other"}
 
 const AddTask = ({ show, addCallback, showCallback }) => {
 
@@ -15,13 +15,16 @@ const AddTask = ({ show, addCallback, showCallback }) => {
     }, [showCallback])
 
     const handleSubmit = (e) => {
+        e.target.reset()
         e.preventDefault()
         handleAdd(formState)
         handleHide()
+        setFormState(defaultValues)
     }
 
     const handleCancel = () => {
-        handleHide()   
+        handleHide()
+        setFormState(defaultValues)
     }
 
     return (
@@ -42,13 +45,31 @@ const AddTask = ({ show, addCallback, showCallback }) => {
                 <div>Time</div>
                 <input type="time" required={true} onChange={(e) => setFormState((prevState) => ({ ...prevState, time: e.target.value }))}/>
             </label>
-            <label>
-                <div>Category</div>
-                <input type="text" required={true} onChange={(e) => setFormState((prevState) => ({ ...prevState, category: e.target.value }))}/>
-            </label>
+            <div className="categories">
+                <label>
+                    School
+                    <input type="radio" name="category" checked={formState.category === "School"} value="School" onChange={(e) => setFormState((prevState) => ({ ...prevState, category: e.target.value }))}/>
+                </label>
+                <label>
+                    Work
+                    <input type="radio" name="category" checked={formState.category === "Work"} value="Work" onChange={(e) => setFormState((prevState) => ({ ...prevState, category: e.target.value }))}/>
+                </label>
+                <label>
+                    Exercise
+                    <input type="radio" name="category" checked={formState.category === "Exercise"} value="Exercise" onChange={(e) => setFormState((prevState) => ({ ...prevState, category: e.target.value }))}/>
+                </label>
+                <label>
+                    Free Time
+                    <input type="radio" name="category" checked={formState.category === "Free Time"} value="Free Time" onChange={(e) => setFormState((prevState) => ({ ...prevState, category: e.target.value }))}/>
+                </label>
+                <label>
+                    Other
+                    <input type="radio" name="category" checked={formState.category === "Other"} value="Other" onChange={(e) => setFormState((prevState) => ({ ...prevState, category: e.target.value }))}/>
+                </label>
+            </div>
             <div className="task-form-buttons">
                 <button type="submit">Add</button>
-                <button type="button" onClick={handleCancel}>Cancel</button>
+                <button type="reset" onClick={handleCancel}>Cancel</button>
             </div>
         </form>
     )
