@@ -21,9 +21,9 @@ const TaskList = ({ appState, addCallback, removeCallback, clearCallback }) => {
                     <button onClick={handleClear}>Clear Tasks</button>
                 </div>
                 {
-                    tasks.map((v, i) => {
-                        return <Task key={i} task={v} removeCallback={handleRemove} />
-                    })
+                    [...tasks]
+                        .sort((t1 , t2) => new Date("1970-01-01T" + t1.time + ":00Z").getTime() - new Date("1970-01-01T" + t2.time + ":00Z").getTime())
+                        .map((v, i) => <Task key={i} task={v} removeCallback={handleRemove} />)
                 }        
             </div>
         </div>
