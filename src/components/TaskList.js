@@ -24,7 +24,7 @@ const TaskList = ({ appState, addCallback, removeCallback, clearCallback }) => {
                     [...tasks]
                         .sort((t1 , t2) => new Date("1970-01-01T" + t1.time + ":00Z").getTime() - new Date("1970-01-01T" + t2.time + ":00Z").getTime())
                         .map((v, i) => <Task key={i} task={v} removeCallback={handleRemove} />)
-                }        
+                }
             </div>
         </div>
     )

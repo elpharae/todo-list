@@ -99,13 +99,24 @@ const App = () => {
         handleChange(new Date())
     }
 
+    const dialogStyle = {
+        filter: showDialog ? "blur(10px)" : "none", 
+        pointerEvents: showDialog ? "none" : "auto",
+    }
+
     return (
         <div className="page">
             <h1>Your Calendar</h1>
             <AddTask show={showDialog} addCallback={handleAdd} showCallback={handleShowDialog}/>
-            <div style={{filter: showDialog ? "blur(10px)" : "none", pointerEvents: showDialog ? "none" : "auto"}} className="container">
+            <div style={dialogStyle} className="container">
                 <Calendar changeCallback={handleChange} exportCallback={handleExport} eraseCallback={handleErase}/>
                 <TaskList appState={appState} addCallback={handleShowDialog} removeCallback={handleRemove} clearCallback={handleClear}/>
+            </div>
+            <div className="footer">
+                <h1>@ UPCE FEI 2023, Simple Calendar app, made by František Boura </h1>
+                <div className="footer-text">
+                    Link to github <a href="https://github.com/elpharae/todo-list">here</a>. (or here https://github.com/elpharae/todo-list)
+                </div>
             </div>
         </div>
     )

@@ -7,22 +7,45 @@
 
 :root {
     --main: #e6e6e6;
-    --main-dim: #cacaca;
-    --main-dark: #9e9e9e;
-    --special: #efac1c;
-    --special-dim: #b27f12;
-    --special-dark: #846420;
-    --status-success-bg: #71cb11;
-    --status-success-border: 5px solid #099007;
-    --status-failure-bg: #e32720;
-    --status-failure-border: 5px solid #c0120c;
-    --status-failure-border: 5px solid #c0120c;
-    --xd: 5px solid #c5ccf9;
+    --main-dim: #acacac;
+    --main-dark: #7a7a7a;
+    --special: #c99857;
+    --special-dim: #a37f3d;
+    --special-dark: #8b6c31;
 }
 
 body {
     overflow-y: scroll;
     overflow-x: hidden;
+}
+
+.page {
+    z-index: 0;
+    margin-bottom: 100px;
+} 
+
+.footer {
+    padding: 5px;
+    position: fixed;
+    bottom: 0%;
+    left: 50%;
+    transform: translate(-50%);
+    width: 100%;
+
+    text-align: center;
+    border-top: 5px solid var(--special-dark);
+    background-color: var(--special)
+}
+
+.footer > h1 {
+    font-size: 1rem;
+}
+
+.footer > .footer-text {
+    font-size: 0.8rem;
+}
+.footer > .footer-text > a {
+    color: inherit;
 }
 
 .page > h1 {
@@ -87,6 +110,7 @@ body {
     align-self: center;
     width: 150px;
 }
+
 .categories > label {
     display: flex;
     justify-content: space-between;
@@ -110,6 +134,10 @@ body {
 
 .categories > label > input[type="radio"]:checked::after {
     background-color: var(--special-dim);
+    border: 0.2rem solid var(--special-dark);
+}
+
+.categories > label > input[type="radio"]:hover::after {
     border: 0.2rem solid var(--special-dark);
 }
 
@@ -171,12 +199,11 @@ body {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     padding: 10px 0;
 }
 
 .calendar-panel > input {
-    width: 80px;
     text-align: center;
     border: none;
 }
@@ -188,9 +215,10 @@ body {
 }
 
 .calendar-panel > * {
-    padding: 0 10px;
-    margin: 0 5px;
-    height: 35px;
+    margin: 0 10px;
+    padding: 10px;
+    height: 30px;
+    width: 25%;
 
     background-color: var(--main);
     border-radius: 10px;
